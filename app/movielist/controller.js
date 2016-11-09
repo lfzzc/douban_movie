@@ -12,17 +12,23 @@
 			controller: 'ListController'
 		});
 	}]);
+	module.controller('SearchController',['$scope','$route',function ($scope,$route) {
+		$scope.input='';
+		$scope.search=function(){
+			$route.updateParams({category:'search',q:$scope.input})
+		}
+	}]);
 	module.controller('ListController', ['$scope','$route','$routeParams','HttpService',function($scope,$route,$routeParams,HttpService) {
 		var pages=parseInt($routeParams.pages);
 		var count=10;
 		var start=(pages-1)*count;
-		$scope.title='';
+		$scope.title='Loading...';
 		$scope.subjects=[];
 		$scope.message='';
 		$scope.totalCount=0;
 		$scope.pageCount=0;
 		$scope.loading=true;
-		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,{start:start,count:count},function (data) {
+		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,{start:start,count:count,q:$routeParams.q},function (data) {
 			$scope.title=data.title;
 			$scope.subjects=data.subjects;
 			$scope.totalCount=data.total;
@@ -37,6 +43,6 @@
 					pages:page
 				})
 			}
-		}
+		};
 	}]);
 })(angular);
