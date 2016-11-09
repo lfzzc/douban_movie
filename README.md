@@ -1,1 +1,1 @@
-# Angular Boilerplate
+# Angular and Bootstrap
