@@ -163,3 +163,6 @@ body {
 .pager a{
 	cursor: pointer;
 }
+.movie_summary{
+	margin-top:10px;
+}

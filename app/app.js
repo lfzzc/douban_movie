@@ -4,7 +4,14 @@
 angular.module('myApp', [
    	'ngRoute',
 	'movie.directive.auto',
+	'movie.detail',
   	'movieList'
-]).config(['$routeProvider', function($routeProvider) {
+])
+	.constant('AppConfig',{
+		pageCount:10,
+		listApi:'http://api.douban.com/v2/movie/',
+		detailApi:'http://api.douban.com/v2/movie/subject/'
+	})
+	.config(['$routeProvider','AppConfig', function($routeProvider,AppConfig) {
   $routeProvider.otherwise({redirectTo: '/in_theaters/1'});
 }]);
